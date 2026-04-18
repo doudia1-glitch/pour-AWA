@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pour Awa</title>
+    <title>Pour Awa - Mon Éternelle</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Playfair Display', serif; } </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style> 
+        body { font-family: 'Playfair Display', serif; overflow-x: hidden; }
+        @keyframes float {
+            0% { transform: translateY(0vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+        .heart {
+            position: fixed;
+            top: 100vh;
+            color: #ec4899;
+            pointer-events: none;
+            animation: float linear forwards;
+            z-index: 50;
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-white min-h-screen flex items-center justify-center">
-    <div id="content" class="text-center p-6">
+    <div id="content" class="text-center p-6 transition-all duration-1000">
         <h1 class="text-7xl md:text-9xl font-light tracking-widest animate-pulse mb-8">AWA</h1>
         <button onclick="reveal()" class="px-8 py-3 border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-all duration-500 rounded-full uppercase tracking-widest text-sm">
             Ouvrir mon cœur
@@ -17,20 +31,54 @@
     </div>
 
     <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
         function reveal() {
+            // Remplace la date ci-dessous par la date exacte de votre premier dimanche (format YYYY-MM-DD)
+            const dateRencontre = new Date('2024-01-07'); 
+            const aujourdhui = new Date();
+            const diffTime = Math.abs(aujourdhui - dateRencontre);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
             document.getElementById('content').innerHTML = `
-                <div class="max-w-md mx-auto bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl transition-all duration-1000 scale-110">
-                    <div class="text-pink-500 text-4xl mb-6">♥</div>
-                    <h2 class="text-2xl text-pink-400 mb-6 italic text-left">Pour l'unique...</h2>
-                    <p class="text-lg leading-relaxed text-gray-200 text-left mb-4">
-                        Awa, j'ai codé cet espace juste pour toi. Un endroit qui n'appartient qu'à nous.
-                    </p>
-                    <p class="text-lg leading-relaxed text-gray-200 text-left italic font-serif">
-                        "Dans le silence de mes codes, ton nom est la plus belle des variables."
-                    </p>
-                    <div class="mt-8 pt-6 border-t border-white/10 text-sm text-gray-500">À jamais.</div>
+                <div class="max-w-lg mx-auto bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl transition-all duration-1000 scale-105">
+                    <div class="text-pink-500 text-5xl mb-6">❤</div>
+                    
+                    <h2 class="text-3xl text-pink-400 mb-2 font-light italic">Pour mon épouse future, Awa</h2>
+                    <p class="text-pink-200/50 text-xs mb-8 uppercase tracking-[0.3em]">Depuis ce dimanche béni : ${diffDays} jours</p>
+
+                    <div class="space-y-6 text-left text-gray-200 text-lg leading-relaxed">
+                        <p>
+                            Awa, chaque ligne de ce code est une promesse. Ce dimanche où nos chemins se sont croisés n'était que le début d'une route que je veux parcourir à tes côtés jusqu'au Paradis, <strong>Insha'Allah</strong>.
+                        </p>
+                        
+                        <p class="italic border-l-2 border-pink-500 pl-4 py-2 bg-pink-500/5 text-pink-100">
+                            "Je demande à <strong>Allah (Soubhanahou wa Ta'ala)</strong> de bénir notre union et de faire de notre futur foyer un havre de paix et de piété."
+                        </p>
+
+                        <p>
+                            J'ai hâte de construire avec toi une vie remplie de douceur, de respect et de foi. Tu es ma plus belle variable, celle qui donne tout son sens à mon existence.
+                        </p>
+                    </div>
+
+                    <div class="mt-10 pt-6 border-t border-white/10 text-[10px] text-gray-500 tracking-widest uppercase">
+                        Sous la protection d'<strong>Allah (Soubhanahou wa Ta'ala)</strong> — À jamais.
+                    </div>
                 </div>
             `;
+
+            // Lancer la pluie de cœurs
+            setInterval(createHeart, 300);
         }
     </script>
 </body>
